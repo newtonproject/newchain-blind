@@ -1,0 +1,14 @@
+wallet/*
+debug.test
+debug
+.idea/*
+.vscode/*
+NewChainBlind
+NewChainBlind.exe
+config.toml
+error.log
+/*.blinded
+/*.blinded.sig
+/*.data
+/*.unblinder
+/*.unblinder.sig
