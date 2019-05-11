@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"fmt"
+	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"os"
@@ -148,4 +149,16 @@ func (cli *CLI) showBalance(cmd *cobra.Command, args []string, showSum bool) {
 	}
 
 	return
+}
+
+func (cli *CLI) openWallet(check bool) error {
+	if cli.wallet == nil {
+		cli.wallet = keystore.NewKeyStore(cli.walletPath,
+			keystore.LightScryptN, keystore.LightScryptP)
+	}
+
+	if check && len(cli.wallet.Accounts()) == 0 {
+		return errWalletPathEmppty
+	}
+	return nil
 }
