@@ -29,24 +29,24 @@ K-->|6. Send Token|B
 2. Alice performs blind signature
     * Alice builds a message with a denomination of 1NEW and adds a random string to the message body.
     ```
-    m1 = (header info, denomination, serial number), …, mk = (header info, denomination, serial number).
+    m = (header info, denomination, serial number)
     ```
     * Alice blinds the message m through the PublicKey of the 1NEW denomination of Bank, 
 and obtains the blinded message blinded and unblind factor unblinder.
 3. Bank sign
     * Alice sends the denomination and the blinded message to the bank
     * Bank checks if Alice has enough denominations for her own
-        * Returns an error if it does not exist;
-        * If there is one, subtract the NEW of the corresponding denomination;
+        * Returns an error if it does not;
+        * If there is, subtract the NEW of the corresponding denomination;
     * Bank encrypts blinded with PrivateKey corresponding to its 1NEW denomination, and gets sig
     * Bank tells Alice about sig
 4. Alice unblind
-    * Alice unblindSig by unblind factor unblinder and sig
+    * Alice get unblindSig by unblind factor unblinder and sig
 5. Alice transfers 1NEW to Bob
-    * Alice tells Bob about the message body m corresponding to unblindSig and 1NEW
+    * Alice tells Bob about the message body m and unblindSig
 6. Bob verifies to the bank
-    * Bob tells the bank to get the message body m and unblindSig from Alice, and tells the bank to transfer the corresponding denomination NEW.
-    * The bank verifies the message body m and unblindSig by the NEW PublicKey of the corresponding denomination
+    * Bob tells the bank the message body m and unblindSig from Alice, and tells the bank to transfer the 1NEW to him.
+    * The bank verifies the message m and unblindSig with the 1NEW's PublicKey
 7. After the verification is successful, Bank transfers Bob to 1NEW.
 
 

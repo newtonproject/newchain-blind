@@ -93,7 +93,7 @@ install:
 git config --global url."git@gitlab.newtonproject.org:".insteadOf "https://gitlab.newtonproject.org/"
 go get gitlab.newtonproject.org/yangchenzhong/NewChainBlind
 ```
-run NewCommander
+run NewChainBlind
 
 ```bash
 $GOPATH/bin/NewChainBlind
@@ -187,8 +187,11 @@ The following fields exist as database storage:
 ## Example
 
 Suppose `Alice` wants send 1NEW to `Bob` by the `Bank`,
+
 Bank's address: 0x873054eacb22516e1dbc966c9ae338eef40fe15c
+
 Alice's address: 0x97549E368AcaFdCAE786BB93D98379f1D1561a29
+
 Bob's address: 0x2a8996eBb0314717dfdCd879685A9246649D7BC1
 
 1. Bank: Create the RSA PEM file
