@@ -191,137 +191,140 @@ The following fields exist as database storage:
 ## Example
 
 Suppose `Alice` wants send 1NEW to `Bob` by the `Bank`,
+
 Bank's address: 0x873054eacb22516e1dbc966c9ae338eef40fe15c
+
 Alice's address: 0x97549E368AcaFdCAE786BB93D98379f1D1561a29
+
 Bob's address: 0x2a8996eBb0314717dfdCd879685A9246649D7BC1
 
 1. Bank: Create the RSA PEM file
-
-Generate an RSA keypair with a 2048 bit private key
-
-```bash
-openssl genpkey -algorithm RSA -out key.pem -pkeyopt rsa_keygen_bits:2048
-```
-
-Extracting the public key from an RSA keypair
-
-```bash
-openssl rsa -pubout -in key.pem -out pubkey.pem
-```
+    
+    Generate an RSA keypair with a 2048 bit private key
+    
+    ```bash
+    openssl genpkey -algorithm RSA -out key.pem -pkeyopt rsa_keygen_bits:2048
+    ```
+    
+    Extracting the public key from an RSA keypair
+    
+    ```bash
+    openssl rsa -pubout -in key.pem -out pubkey.pem
+    ```
 
 2. Bank: Initialize config file
 
-```bash
-# Initialize config file
-NewChainBlind init
-```
-
-Just press Enter to use the default configuration, and it's best to create a new user.
-
-```bash
-Initialize config file
-Enter file in which to save (./config.toml):
-Enter the wallet storage directory (./wallet/):
-Enter NewChain json rpc or ipc url (https://rpc1.newchain.newtonproject.org):
-Enter path of Private Key RSA Pem file(./key.pem):
-Enter path of Public Key RSA Pem file(./pubkey.pem):
-Create a new bank account or not: [Y/n]
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-0x873054eAcB22516E1dBC966C9aE338eef40FE15c
-Your configuration has been saved in  ./config.toml
-```
+    ```bash
+    # Initialize config file
+    NewChainBlind init
+    ```
+    
+    Just press Enter to use the default configuration, and it's best to create a new user.
+    
+    ```bash
+    Initialize config file
+    Enter file in which to save (./config.toml):
+    Enter the wallet storage directory (./wallet/):
+    Enter NewChain json rpc or ipc url (https://rpc1.newchain.newtonproject.org):
+    Enter path of Private Key RSA Pem file(./key.pem):
+    Enter path of Public Key RSA Pem file(./pubkey.pem):
+    Create a new bank account or not: [Y/n]
+    Your new account is locked with a password. Please give a password. Do not forget this password.
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    0x873054eAcB22516E1dBC966C9aE338eef40FE15c
+    Your configuration has been saved in  ./config.toml
+    ```
 
 3. Bank: Get the info of the bank
-
-```bash
-NewChainBlind info
-```
-
-then show the public key to all users
+    
+    ```bash
+    NewChainBlind info
+    ```
+    
+    then show the public key to all users
 
 4. Alice: Deposit
-
-Use `NewCommander pay` to send 10 NEW to the address of bank, the send the sign tx hash to the bank
+    
+    Use `NewCommander pay` to send 10 NEW to the address of bank, the send the sign tx hash to the bank
 
 5. Bank: Check Alice deposit
-
-Use `NewChainBlind deposit <txHash>` to add the balance for Alice
-
-```bash
-NewChainBlind deposit 0xfea3844616766cea49c21447d6e5a8c4521192b820c567bff81678615966987e
-```
+    
+    Use `NewChainBlind deposit <txHash>` to add the balance for Alice
+    
+    ```bash
+    NewChainBlind deposit 0xfea3844616766cea49c21447d6e5a8c4521192b820c567bff81678615966987e
+    ```
 
 6. Alice: Blind
-
-Alice blind 1NEW with a random message and the bank public key
-
-```bash
-# blind 1NEW, only support 1NEW
-NewChainBlind blind pubkey.pem
-```
-
-the output of the cmd is as follow:
-
-```txt
-Data:  20190511140547.data
-Blinded:  20190511140547.blinded
-Unblinder:  20190511140547.unblinder
-Send blinded file to bank
-```
-
-the file is named with time-based random string, 
-such as `20190511140547` in this example,
-Send 20190511140547.blinded to bank
+    
+    Alice blind 1NEW with a random message and the bank public key
+    
+    ```bash
+    # blind 1NEW, only support 1NEW
+    NewChainBlind blind pubkey.pem
+    ```
+    
+    the output of the cmd is as follow:
+    
+    ```txt
+    Data:  20190511140547.data
+    Blinded:  20190511140547.blinded
+    Unblinder:  20190511140547.unblinder
+    Send blinded file to bank
+    ```
+    
+    the file is named with time-based random string, 
+    such as `20190511140547` in this example,
+    Send 20190511140547.blinded to bank
 
 7. Bank: Sign
-
-The Bank sign the blinded file `*.blinded` for Alice.
-The Bank will check the balance of Alice (the array of `balances` in `config.toml`) 
-and sub 1NEW from the balance of the Alice's address
-
-```bash
-# Sign the blinded file
-NewChainBlind sign 20190511140547.blinded 0x97549E368AcaFdCAE786BB93D98379f1D1561a29
-```
-
-the output is as follow:
-```txt
-Sub 1 NEW for 0x97549E368AcaFdCAE786BB93D98379f1D1561a29
-Current balance of 0x97549E368AcaFdCAE786BB93D98379f1D1561a29 is 59 NEW
-Sign:  20190511140547.blinded.sig
-Send signed blinded file back to user1
-```
-
-then send the 20190511140547.blinded.sig back to the user
+    
+    The Bank sign the blinded file `*.blinded` for Alice.
+    The Bank will check the balance of Alice (the array of `balances` in `config.toml`) 
+    and sub 1NEW from the balance of the Alice's address
+    
+    ```bash
+    # Sign the blinded file
+    NewChainBlind sign 20190511140547.blinded 0x97549E368AcaFdCAE786BB93D98379f1D1561a29
+    ```
+    
+    the output is as follow:
+    ```txt
+    Sub 1 NEW for 0x97549E368AcaFdCAE786BB93D98379f1D1561a29
+    Current balance of 0x97549E368AcaFdCAE786BB93D98379f1D1561a29 is 59 NEW
+    Sign:  20190511140547.blinded.sig
+    Send signed blinded file back to user1
+    ```
+    
+    then send the 20190511140547.blinded.sig back to the user
 
 8. Alice: Unblind
+    
+    Alice un-blinds it by using `pubkey.pem`, `*.blinded.sig` and `*.unblinder`
+    
+    ```bash
+    # Unblind with unblinder
+    NewChainBlind unblind pubkey.pem 20190511140547.blinded.sig 20190511140547.unblinder
+    ```
+    
+    the output is as follow:
+    ````txt
+    UnblinderSig:  20190511140547.unblinder.sig
+    Send unblinder sig file and cash data to others
+    ````
 
-Alice un-blinds it by using `pubkey.pem`, `*.blinded.sig` and `*.unblinder`
+9. Alice Pay to Bob
+    * when Alice pay 1NEW to Bob, just send him the file `20190511140547.unblinder.sig` and `20190511140547.data`
+    * when Bob get the file, then him should send both of the file `20190511140547.unblinder.sig` and `20190511140547.data` to bank to verify it
 
-```bash
-# Unblind with unblinder
-NewChainBlind unblind pubkey.pem 20190511140547.blinded.sig 20190511140547.unblinder
-```
+10. Bank: Verify
 
-the output is as follow:
-````txt
-UnblinderSig:  20190511140547.unblinder.sig
-Send unblinder sig file and cash data to others
-````
-
-9: Alice Pay to Bob
-  * when Alice pay 1NEW to Bob, just send him the file `20190511140547.unblinder.sig` and `20190511140547.data`
-  * when Bob get the file, then him should send both of the file `20190511140547.unblinder.sig` and `20190511140547.data` to bank to verify it
-
-9: Bank: Verify
-
-Verify unblinder and data, then send 1NEW to Bob
-
-```bash
-# Verify unblinder and data, then send 1NEW to Bob's address
-NewChainBlind verify 20190511140547.unblinder.sig 20190511140547.data 0x2a8996eBb0314717dfdCd879685A9246649D7BC1
-```
-
-if ok, then the bank pay 1 NEW to Bob's address on chain
+    Verify unblinder and data, then send 1NEW to Bob
+    
+    ```bash
+    # Verify unblinder and data, then send 1NEW to Bob's address
+    NewChainBlind verify 20190511140547.unblinder.sig 20190511140547.data 0x2a8996eBb0314717dfdCd879685A9246649D7BC1
+    ```
+    
+    if ok, then the bank pay 1 NEW to Bob's address on chain
