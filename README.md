@@ -42,8 +42,8 @@ and obtains the blinded message blinded and unblind factor unblinder.
     * Bank tells Alice about sig
 4. Alice unblind
     * Alice get unblindSig by unblind factor unblinder and sig
-5. Alice transfers 1NEW to Bob
-    * Alice tells Bob about the message body m and unblindSig
+5. Alice tells Bob the proof of 1NEW
+    * Alice tells Bob the message body m and unblindSig
 6. Bob verifies to the bank
     * Bob tells the bank the message body m and unblindSig from Alice, and tells the bank to transfer the 1NEW to him.
     * The bank verifies the message m and unblindSig with the 1NEW's PublicKey
