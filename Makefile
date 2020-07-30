@@ -5,4 +5,6 @@ BUILD_COMMIT=`git rev-parse --short HEAD`
 all:
 	go build -ldflags "-X github.com/newtonproject/newchain-blind/cli.buildCommit=${BUILD_COMMIT}\
 	    -X github.com/newtonproject/newchain-blind/cli.buildDate=${BUILD_DATE}"
-
+install:
+	go build -ldflags "-X github.com/newtonproject/newchain-blind/cli.buildCommit=${BUILD_COMMIT}\
+	    -X github.com/newtonproject/newchain-blind/cli.buildDate=${BUILD_DATE}"
