@@ -4,7 +4,6 @@ import (
 	"os"
 
 	"github.com/ethereum/go-ethereum/common"
-
 	"github.com/spf13/viper"
 )
 

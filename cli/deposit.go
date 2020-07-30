@@ -4,6 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"math/big"
+	"strings"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -11,16 +14,14 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"math/big"
-	"strings"
 )
 
 func (cli *CLI) buildDepositCmd() *cobra.Command {
 	faucetCmd := &cobra.Command{
-		Use:   "deposit <TxHash>",
-		Short: "Use the TxHash to deposit NEW(decimal not counted)",
+		Use:                   "deposit <TxHash>",
+		Short:                 "Use the TxHash to deposit NEW(decimal not counted)",
 		DisableFlagsInUseLine: true,
-		Args: cobra.MinimumNArgs(1),
+		Args:                  cobra.MinimumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			if cli.bank.Address == (common.Address{}) {
 				fmt.Println("Not bank address set, please run `init bank`")

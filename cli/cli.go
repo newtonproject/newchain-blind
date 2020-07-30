@@ -3,14 +3,13 @@ package cli
 import (
 	"bytes"
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
 	"io"
 	"math/big"
 	"os"
 	"strings"
 
 	"github.com/ethereum/go-ethereum/accounts/keystore"
-
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/spf13/cobra"
 )

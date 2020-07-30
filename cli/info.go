@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"fmt"
+
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/spf13/cobra"
@@ -11,8 +12,8 @@ import (
 
 func (cli *CLI) buildInfoCmd() *cobra.Command {
 	faucetCmd := &cobra.Command{
-		Use:   "info",
-		Short: "Show the info of the bank",
+		Use:                   "info",
+		Short:                 "Show the info of the bank",
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("Bank Dashboard")

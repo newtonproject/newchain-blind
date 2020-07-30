@@ -4,6 +4,8 @@ import (
 	"context"
 	"crypto"
 	"fmt"
+	"math/big"
+
 	"github.com/cryptoballot/fdh"
 	"github.com/cryptoballot/rsablind"
 	"github.com/ethereum/go-ethereum"
@@ -13,17 +15,16 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/newtonproject/newchain-blind/blind"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"gitlab.newtonproject.org/yangchenzhong/NewChainBlind/blind"
-	"math/big"
 )
 
 func (cli *CLI) buildVerifyCmd() *cobra.Command {
 	faucetCmd := &cobra.Command{
-		Use:   "verify <hexFile.unblinder.sig> <hexFile.data> <address>",
-		Short: "Verify unblinder sign file and send 1NEW to address",
-		Args:  cobra.MinimumNArgs(3),
+		Use:                   "verify <hexFile.unblinder.sig> <hexFile.data> <address>",
+		Short:                 "Verify unblinder sign file and send 1NEW to address",
+		Args:                  cobra.MinimumNArgs(3),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			if cli.bank.Address == (common.Address{}) {

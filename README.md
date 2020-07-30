@@ -73,34 +73,16 @@ Binary archives are published at https://release.cloud.diynova.com/newton/NewCha
 
 ### Building the source
 
-To get from gitlab via `go get`, this will get source and install dependens(cobra, viper, logrus).
-
-#### Windows
-
 install command
 
 ```bash
-go get gitlab.newtonproject.org/yangchenzhong/NewChainBlind
+git clone https://github.com/newtonproject/newchain-blind.git && cd newchain-blind && make install
 ```
 
-run NewCommander
+run `newchain-blind`
 
 ```bash
-%GOPATH%/bin/NewChainBlind.exe
-```
-
-#### Linux or Mac
-
-install:
-
-```bash
-git config --global url."git@gitlab.newtonproject.org:".insteadOf "https://gitlab.newtonproject.org/"
-go get gitlab.newtonproject.org/yangchenzhong/NewChainBlind
-```
-run NewCommander
-
-```bash
-$GOPATH/bin/NewChainBlind
+%GOPATH%/bin/newchain-blind
 ```
 
 ### Usage

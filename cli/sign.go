@@ -3,21 +3,21 @@ package cli
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/cryptoballot/rsablind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/spf13/viper"
-	"gitlab.newtonproject.org/yangchenzhong/NewChainBlind/blind"
 	"io/ioutil"
 	"strings"
 
+	"github.com/cryptoballot/rsablind"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/newtonproject/newchain-blind/blind"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 func (cli *CLI) buildSignCmd() *cobra.Command {
 	faucetCmd := &cobra.Command{
-		Use:   "sign <hexFile.blinded> <address>",
-		Short: "Sign blinded file for address of cash 1NEW",
-		Args:  cobra.MinimumNArgs(2),
+		Use:                   "sign <hexFile.blinded> <address>",
+		Short:                 "Sign blinded file for address of cash 1NEW",
+		Args:                  cobra.MinimumNArgs(2),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			key, err := blind.LoadPEMPrivKeyFile(cli.bank.RSAPEMPrivateKeyFile)

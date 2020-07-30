@@ -3,17 +3,18 @@ package cli
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/cryptoballot/rsablind"
-	"github.com/spf13/cobra"
-	"gitlab.newtonproject.org/yangchenzhong/NewChainBlind/blind"
 	"io/ioutil"
+
+	"github.com/cryptoballot/rsablind"
+	"github.com/newtonproject/newchain-blind/blind"
+	"github.com/spf13/cobra"
 )
 
 func (cli *CLI) buildUnblindCmd() *cobra.Command {
 	faucetCmd := &cobra.Command{
-		Use:   "unblind <pubkey> <file.blinded.sig> <file.unblinder>",
-		Short: "Unblind 1NEW for address",
-		Args:  cobra.MinimumNArgs(3),
+		Use:                   "unblind <pubkey> <file.blinded.sig> <file.unblinder>",
+		Short:                 "Unblind 1NEW for address",
+		Args:                  cobra.MinimumNArgs(3),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			pub, err := blind.LoadPEMPublicKeyFile(args[0])

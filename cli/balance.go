@@ -3,19 +3,19 @@ package cli
 import (
 	"context"
 	"fmt"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"os"
 
+	"github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
 )
 
 func (cli *CLI) buildBalanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "balance [-u NEW|WEI] [-n pending] [-s] [address1] [address2]...",
-		Short: "Get balance of address",
-		Args:  cobra.MinimumNArgs(0),
+		Use:                   "balance [-u NEW|WEI] [-n pending] [-s] [address1] [address2]...",
+		Short:                 "Get balance of address",
+		Args:                  cobra.MinimumNArgs(0),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			cli.showBalance(cmd, args, false)

@@ -3,8 +3,8 @@ debug.test
 debug
 .idea/*
 .vscode/*
-NewChainBlind
-NewChainBlind.exe
+newchain-blind
+newchain-blind.exe
 config.toml
 error.log
 /*.blinded

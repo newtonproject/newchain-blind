@@ -4,18 +4,19 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/spf13/cobra"
-	"gitlab.newtonproject.org/yangchenzhong/NewChainBlind/blind"
 	"io/ioutil"
 	"time"
+
+	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/newtonproject/newchain-blind/blind"
+	"github.com/spf13/cobra"
 )
 
 func (cli *CLI) buildBlindCmd() *cobra.Command {
 	faucetCmd := &cobra.Command{
-		Use:   "blind <pubkey>",
-		Short: "Blind 1NEW for address",
-		Args:  cobra.MinimumNArgs(1),
+		Use:                   "blind <pubkey>",
+		Short:                 "Blind 1NEW for address",
+		Args:                  cobra.MinimumNArgs(1),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 

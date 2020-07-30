@@ -5,14 +5,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/spf13/viper"
 
 	"github.com/btcsuite/btcutil/base58"
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 func (cli *CLI) buildAccountCmd() *cobra.Command {
@@ -37,9 +37,9 @@ func (cli *CLI) buildAccountCmd() *cobra.Command {
 
 func (cli *CLI) buildAccountNewCmd() *cobra.Command {
 	accountNewCmd := &cobra.Command{
-		Use:   "new [-n number] [--faucet] [-s] [-l]",
-		Short: "create a new account",
-		Args:  cobra.MinimumNArgs(0),
+		Use:                   "new [-n number] [--faucet] [-s] [-l]",
+		Short:                 "create a new account",
+		Args:                  cobra.MinimumNArgs(0),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			if cmd.Flags().Changed("light") {
@@ -112,9 +112,9 @@ func (cli *CLI) createAccount(numOfNew int) ([]common.Address, error) {
 
 func (cli *CLI) buildAccountListCmd() *cobra.Command {
 	accountListCmd := &cobra.Command{
-		Use:   "list",
-		Short: "list all accounts in the wallet path",
-		Args:  cobra.MinimumNArgs(0),
+		Use:                   "list",
+		Short:                 "list all accounts in the wallet path",
+		Args:                  cobra.MinimumNArgs(0),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := cli.openWallet(true); err != nil {
@@ -133,9 +133,9 @@ func (cli *CLI) buildAccountListCmd() *cobra.Command {
 
 func (cli *CLI) buildAccountConvertCmd() *cobra.Command {
 	accountListCmd := &cobra.Command{
-		Use:   "convert",
-		Short: "convert address to NewChainAddress",
-		Args:  cobra.MinimumNArgs(1),
+		Use:                   "convert",
+		Short:                 "convert address to NewChainAddress",
+		Args:                  cobra.MinimumNArgs(1),
 		DisableFlagsInUseLine: true,
 		Hidden:                true,
 		Run: func(cmd *cobra.Command, args []string) {
@@ -176,9 +176,9 @@ func (cli *CLI) buildAccountConvertCmd() *cobra.Command {
 
 func (cli *CLI) buildAccountUpdateCmd() *cobra.Command {
 	accountNewCmd := &cobra.Command{
-		Use:   "update <address> [-s]",
-		Short: "Update an existing account",
-		Args:  cobra.MinimumNArgs(1),
+		Use:                   "update <address> [-s]",
+		Short:                 "Update an existing account",
+		Args:                  cobra.MinimumNArgs(1),
 		DisableFlagsInUseLine: true,
 		Run: func(cmd *cobra.Command, args []string) {
 			standard, _ := cmd.Flags().GetBool("standard")
@@ -284,9 +284,9 @@ func newToAddress(chainID []byte, newAddress string) (common.Address, error) {
 
 func (cli *CLI) buildAccountImportCmd() *cobra.Command {
 	accountListCmd := &cobra.Command{
-		Use:   "import <hexkey>",
-		Short: "import hex private key to wallet",
-		Args:  cobra.MinimumNArgs(1),
+		Use:                   "import <hexkey>",
+		Short:                 "import hex private key to wallet",
+		Args:                  cobra.MinimumNArgs(1),
 		DisableFlagsInUseLine: true,
 		Hidden:                true,
 		Run: func(cmd *cobra.Command, args []string) {
@@ -331,9 +331,9 @@ func (cli *CLI) buildAccountImportCmd() *cobra.Command {
 
 func (cli *CLI) buildAccountExportCmd() *cobra.Command {
 	accountListCmd := &cobra.Command{
-		Use:   "export <hexAddress>",
-		Short: "export hex private key of the specified address",
-		Args:  cobra.MinimumNArgs(1),
+		Use:                   "export <hexAddress>",
+		Short:                 "export hex private key of the specified address",
+		Args:                  cobra.MinimumNArgs(1),
 		DisableFlagsInUseLine: true,
 		Hidden:                true,
 		Run: func(cmd *cobra.Command, args []string) {
